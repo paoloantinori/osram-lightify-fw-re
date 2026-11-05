@@ -3,9 +3,11 @@
 
 llvm-objdump refuses raw binaries, and odd (Thumb) entry points are what tells
 the disassembler to decode Thumb. The wrapper has one .text section loaded at
-0x100020 with e_entry = base+0x21 (odd) and EABI5 e_flags.
+the given base with e_entry = base+0x21 (odd) and EABI5 e_flags. The default
+base is 0x100000 and the 32-byte firmware header is skipped, per the
+scatter-table anchor (see findings/0005).
 
-Usage: python3 make_elf.py payload.bin out.elf [base; NOTE: the payload includes a 32-byte firmware header at offset 0, code starts at +0x20, so build with data=payload[32:] and base 0x100000]
+Usage: python3 make_elf.py payload.bin out.elf [base]
 Then: llvm-objdump --disassemble-all --triple=thumbv7m-none-eabi out.elf > full.asm
 """
 import struct, sys
@@ -32,5 +34,5 @@ if __name__ == "__main__":
     src = sys.argv[1]
     dst = sys.argv[2] if len(sys.argv) > 2 else "payload.elf"
     base = int(sys.argv[3], 0) if len(sys.argv) > 3 else 0x100000
-    open(dst, "wb").write(build(open(src, "rb").read(), base))
+    open(dst, "wb").write(build(open(src, "rb").read()[32:], base)  # skip the 32-byte firmware header)
     print(f"wrote {dst} (base 0x{base:x})")
