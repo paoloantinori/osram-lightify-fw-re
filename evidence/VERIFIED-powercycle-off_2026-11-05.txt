@@ -1,0 +1,18 @@
+# PROVA FINALE VERIFICATA - 2026-11-05 19:17
+# Protocollo (astra): lampada ACCESA prima del ciclo (via sensore presenza, brightness 254),
+# power-cycle fisico, osservare lo stato al ritorno. Da ON -> OFF dimostra default-OFF
+# persistito che vince sullo stato precedente (non un generico restore ultimo-stato).
+# Timeline catturata dal monitor MQTT:
+#   19:16:31 STATE: ON  (brightness 254, lqi 43)   <- lampada accesa
+#   19:17:37 ANNOUNCE: osram_cantina ha ricevuto corrente
+#   19:17:39 STATE: OFF (brightness 254, lqi 40)   <- TORNA SPENTA
+# Conferma visiva del maintainer: "off!"
+# Post-reboot attrs FC0F 4-7: {4:1, 5:0, 6:3, 7:1} = config sopravvissuta al reboot (NVM persistente).
+# CONCLUSIONE: cmd 0xFC0F/0x0C payload 01 (C01) rende la AC03641 capace di restore-OFF
+# al ritorno della corrente. Problema power-on RISOLTO via software su questa famiglia.
+
+# Applicazione alla flotta:
+#   osram_cantina       C01 + VERIFICATO fisicamente (questa evidenza)
+#   osram_guardaroba_1  C01 + verificato via attrs {4:1,5:0,6:3,7:1}
+#   osram_guardaroba_2  C01 inviato, lettura verifica RIFIUTATA dalla lampada
+#                       (UNSUP_MANUF_GENERAL_COMMAND attivo, non timeout): verifica fisica pendente
