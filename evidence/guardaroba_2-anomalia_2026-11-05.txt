@@ -1,0 +1,10 @@
+# Anomalia guardaroba_2 confermata in condizioni controllate - 2026-11-05 20:22-20:24
+# Setup: _2 UNICA lampada accesa della stanza (_1 e Philips LTW010 spente, nessuna ambiguita'),
+# monitor con sorveglianza del topic set, interrogazione diretta post-ciclo + conferma visiva.
+# C01 ri-applicato 20:22 -> ciclo 20:23:01 -> tornata ON (query + maintainer: "tornata accesa")
+# B01 (cmd 0x0B payload 01, ramo snapshot) applicato 20:23:42 -> ciclo 20:24:19 -> tornata ON
+# Letture attributi FC0F: rifiutate sistematicamente (UNSUP_MANUF_GENERAL_COMMAND, risposta
+#   ZCL attiva, non timeout) fin dalle 17:2x.
+# CONCLUSIONE: l'unita' 0x7cb03eaa00afa9df ignora l'intero percorso di scrittura 0xFC0F
+# (fallback C01 e snapshot B01) e rifiuta le letture dello stesso cluster. Causa aperta
+# (batch/build/stato NVM). Tutte le altre unita' AC03641/AB32840 testate applicano entrambe.
