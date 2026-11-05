@@ -26,3 +26,14 @@ CHIUSURA: C01 riapplicato a guardaroba_1 alle 20:07:04 (soluzione in opera).
 Stato flotta alla chiusura: cantina C01 (verificato ieri 19:17 + conferme),
 guardaroba_1 C01 (provato e controprovato oggi), guardaroba_2 C01 non attecchito
 (rifiuta attivamente le letture produttore: anomalia specifica di quel pezzo, aperta).
+
+# AGGIUNTA - Estensione AB32840 (Stella), 20:17-20:20
+# Converter esteso al modello "Classic B40 TW - LIGHTIFY" (AB32840).
+# Stella baseline attrs 0-7: {0:0,1:0,2:0,3:0,4:1,5:0,6:3,7:0} (attr7=0: default-ON, profilo
+# identico alle A60). C01 inviato alle 20:17, post-C01 {4:1,5:0,6:3,7:1} (attr7 0->1: preso).
+# Scene presenza l'ha riaccesa a brightness 3 (20:17:50); maintainer ha chiesto OFF + reset C01
+# (fatto 20:18:57-58, state OFF + osram_set_last 12:1).
+# Power-cycle del maintainer alle 20:19:37: tornata SPENTA (conferma visiva + query diretta OFF).
+# Nota di rigore: ciclo partito da OFF (non discrimina default-OFF da ultimo-stato DA SOLA),
+# ma la discriminante e' gia' provata dalla A/B su guardaroba_1 (ON->OFF con C01, ON->ON con C03).
+# Scale (altra AB32840): irraggiungibile (MAC_NO_ACK, mesh child marginale): C01 PENDENTE.
