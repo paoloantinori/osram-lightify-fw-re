@@ -15,6 +15,6 @@ device rebooted (announce 21:02:05). Read-only post checks: genBasic now
 readable (was UNSUP_MANUF_GENERAL_COMMAND); baseline attrs match the fleet
 profile; C01 applied and verified (attr7 0->1).
 
-Final power-cycle verification pending maintainer. With it, the whole AC03641
+VERIFIED at 21:14: fresh-ON power cycle by the maintainer, restored OFF (visual + telemetry). With it, the whole AC03641
 fleet (3/3) plus one AB32840 run the restore-OFF config; Scale (AB32840)
 remains pending mesh reachability.

@@ -13,3 +13,7 @@
 #   3. C01 (12:1) -> attrs {4:1,5:0,6:3,7:1}: attr7 0->1, preso.
 # PENDING: power-cycle del maintainer (attesa conferma OFF). La lampada era gia' accesa
 # (brightness 200 al reboot): il ciclo da ON discrimina default-OFF.
+# VERDETTO FINALE 21:14: power-cycle del maintainer su guardaroba_2 (ON fresco, brightness 200)
+# 21:14:12 ANNOUNCE -> 21:14:14 STATE: OFF. Conferma visiva: "tornata spenta".
+# La lampada ex-anomala (V1.04.12 + metadati OTA bugiardi) ora: V1.05.10 ufficiale,
+# cluster FC0F funzionante, C01 attivo, restore-OFF verificato dal ciclo da ON.
