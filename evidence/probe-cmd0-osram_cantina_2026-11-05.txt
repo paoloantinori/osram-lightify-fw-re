@@ -1,0 +1,18 @@
+# Probe cmd 0 (read probe) su osram_cantina, 2026-11-05 ~16:55
+# Comando: MQTT publish zigbee2mqtt/osram_cantina/set {"osram_raw": 0}
+# Tool: tools/probe_fc0f.py (exit 0 = state update post-invio osservato)
+# NOTE: herdsman command() con raw0 definito attende default-response; nessun throw
+# (osram_raw_last pubblicato => convertSet completato), MA nessun frame 0x1234 osservato
+# e nessun osram_raw_event. Il ramo cmd0 del dispatcher NON e' provato eseguito:
+# la mancata risposta e' compatibile sia con "eseguito senza echo" sia con "non raggiunto".
+--- 5 messaggi DOPO l'invio:
+ 0.1s zigbee2mqtt/bridge/logging -> {"level":"info","message":"z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/osram_cantina', payload '{\"brightness\":254,\"level_config\":{\"on_level\":\"previous\"},\"linkquality\":43,\"osram_raw_last\":0,\"state\":\"OFF\",\"update\":{\"installed_version\":16909584,...\"update_available\":false}'..."}
+ 0.1s (duplicato logging del medesimo payload)
+ 0.1s zigbee2mqtt/osram_cantina -> {"brightness":254,"level_config":{"on_level":"previous"},"linkquality":43,"osram_raw_last":0,"state":"OFF","update":{"installed_version":16909584,"latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/Osram/ZLL_MK_0x01020510_CLA60_W_CLEAR.ota","latest_version":16909584,"state":"idle"},"update_available":false}
+ 17.6s zigbee2mqtt/bridge/logging -> payload guardaroba_1 (non pertinente, report periodico)
+ 17.6s (duplicato)
+
+--- Slice log frontend Z2M (/config/zigbee2mqtt/log/2026-11-05.16-47-39/log.log su host HA):
+[2026-11-05 16:48:39] info: MQTT publish zigbee2mqtt/osram_cantina payload {"...","osram_raw_last":0,...}   <- esito convertSet
+[2026-11-05 16:49:43] info: (republish cache con osram_raw_last persistito)
+NOTA: il log frontend e' a livello info: NON cattura il frame ZCL in/out. Nessun raw-frame log esiste per questo test.
