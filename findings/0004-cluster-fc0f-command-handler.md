@@ -1,3 +1,29 @@
+# CORRECTION 2026-11-05 (post adversarial review by astra, verified mechanically)
+
+Two semantic claims in this finding are retracted/corrected:
+
+1. The boot path description was imprecise. 0x103E96 does NOT embed the 3-bit
+   mode into the callback object word: it stores a FUNCTION POINTER (literal
+   0x10A989, a pointer table at 0x10A988) into the local's first word, and the
+   masked mode (config[0x24]&7) goes into a separate stack word; the sequence
+   tail-calls ROM helper 0x60C8 with the mode as argument. Reading: callback
+   registration into the ROM scheduler with the mode as callback argument, not
+   a "power-on event with embedded mode".
+2. The claim that 0x10A9C8 reports the mode as an attribute is RETRACTED: it
+   feeds ROM 0x60C8, not the ZCL send helper 0x1031EC (which is what the
+   dispatcher uses at 0x100BCE/0x100C38).
+
+Unchanged and re-verified after the base-shift challenge: load base 0x100020
+stands (pointer-literal vs function-start alignment histogram shows exact
+delta-0 hits and no 0x40 dominance; the two candidate -0x40 pointers resolve
+to a data pointer-table at 0x10A988 and to a branch-skipped div-helper entry
+at 0x100B92, not to shifted copies of published functions). The dispatcher
+itself, the save/reset paths, the 0xAA magic write and the undocumented
+commands 0/9/0x0A are unaffected. The cmd-0 branch remains NOT proven to have
+executed in the live probe.
+
+---
+
 # Finding 0004: the manuSpecificOsram (0xFC0F) command handler and its undocumented commands
 
 **Date**: 2026-11-05
