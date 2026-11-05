@@ -9,7 +9,9 @@ import json, time
 import paho.mqtt.client as mqtt
 
 HOST, PORT = "192.168.20.110", 1883
-USER, PW = "addons", "REDACTED"
+import os
+USER = os.environ.get("PROBE_MQTT_USER")
+PW = os.environ.get("PROBE_MQTT_PASS")
 DEV = "osram_cantina"
 last_state = {}
 announce_at = None
@@ -50,6 +52,8 @@ def on_msg(c, u, m):
 c = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id="pcmon%d" % int(time.time() * 1000 % 1e9))
 c.on_connect = on_connect
 c.on_message = on_msg
+if not USER or not PW:
+    raise SystemExit("set PROBE_MQTT_USER / PROBE_MQTT_PASS in the environment")
 c.username_pw_set(USER, PW)
 c.connect(HOST, PORT, 15)
 c.loop_forever(retry_first_connection=True)
