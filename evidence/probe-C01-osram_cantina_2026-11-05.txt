@@ -1,0 +1,8 @@
+# C01 (cmd 0x0C payload 01) su osram_cantina, 2026-11-05 ~17:25
+# Lettura attributi FC0F PRIMA:  {0:52, 1:0, 2:0, 3:0, 4:1, 5:0, 6:3, 7:0}
+# Invio: zigbee2mqtt/osram_cantina/set {"osram_set":{"command":12,"mode":1}}  (state: osram_set_last "12:1")
+# Lettura attributi FC0F DOPO:  {4:1, 5:0, 6:3, 7:1}
+# DELTA: attr7 0->1 (flag config+0x10 = usa-valore-salvato), attr5 resta 0 (u16 config+0xC = OFF)
+# Predizione statica (astra + verifica locale): al prossimo power-cycle la lampada
+# deve tornare SPENTA (ramo fallback: flag=1, valore salvato=0) invece che accesa.
+# PENDING: power-cycle fisico per la prova finale.

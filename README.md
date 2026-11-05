@@ -37,6 +37,15 @@ tries to answer from the firmware itself:
   save command writes a 0xAA magic into the persisted power-on mode byte the
   firmware consults at boot. See
   [findings/0004](findings/0004-cluster-fc0f-command-handler.md).
+- MAP CORRECTION (2026-11-05 evening, by astra + independent verification):
+  the app links at 0x100000 (all earlier addresses were +0x40 high), and the
+  region called "persistent flash not in the OTA" is actually .data (RLE
+  compressed inside the OTA) plus .bss. The REAL 0xFC0F parser handles EIGHT
+  commands including the previously unknown 0x0B and 0x0C, which write the
+  persisted power-on on/off state directly. C01 executed live on a bulb with
+  exactly the predicted attribute deltas. See
+  [findings/0005](findings/0005-real-parser-and-c01.md).
+
 
 ## Reproduce
 
