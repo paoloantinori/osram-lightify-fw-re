@@ -1,0 +1,12 @@
+[
+  {
+    "fileVersion": 16909584,
+    "fileSize": 123884,
+    "manufacturerCode": 4364,
+    "imageType": 19,
+    "sha512": "173e9e77434118ebb5a0d83032063cf594cc201b42277a90e080b196497cf442",
+    "url": "https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/Osram/ZLL_MK_0x01020510_CLA60_W_CLEAR.ota",
+    "force": true,
+    "productNames": ["OSRAM LIGHTIFY Classic A60 W clear (AC03641) - force same-version reflash for V1.04.12 units with desynced OTA metadata"]
+  }
+]

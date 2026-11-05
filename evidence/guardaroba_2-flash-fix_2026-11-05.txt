@@ -1,0 +1,15 @@
+# Flash e risoluzione di guardaroba_2 - 2026-11-05 20:51-21:03
+# Approvazione maintainer: "Vai" (turno delle 20:51)
+# Via: indice per-richiesta force (per gate astra: no override globale, no schedule,
+#   immagine ufficiale immutata). Indice /config/zigbee2mqtt/ota-force-cla60.json:
+#   entry unica tuple 4364/19, fileVersion 16909584, force:true, URL raw pubblico,
+#   sha512 7f4bb423...bcf5 (coincide con verifica indipendente astra).
+# Check con indice inline: update_available TRUE (equal+force, come da test offline astra).
+# Update avviato 20:52: progress 72.69@20:59 -> 96.95@21:01 -> 100, reboot (announce 21:02:05).
+# POST-FLASH, protocollo astra (letture prima, stop al mismatch):
+#   1. genBasic live: {"appVersion":16,"swBuildId":"V1.05.10"}  <- era V1.04.12/appVersion 0
+#   2. FC0F read: {"4":1,"5":0,"6":3,"7":0} (baseline vergine, cluster ora leggibile:
+#      prima UNSUP_MANUF_GENERAL_COMMAND)
+#   3. C01 (12:1) -> attrs {4:1,5:0,6:3,7:1}: attr7 0->1, preso.
+# PENDING: power-cycle del maintainer (attesa conferma OFF). La lampada era gia' accesa
+# (brightness 200 al reboot): il ciclo da ON discrimina default-OFF.
