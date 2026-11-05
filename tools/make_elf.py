@@ -34,5 +34,6 @@ if __name__ == "__main__":
     src = sys.argv[1]
     dst = sys.argv[2] if len(sys.argv) > 2 else "payload.elf"
     base = int(sys.argv[3], 0) if len(sys.argv) > 3 else 0x100000
-    open(dst, "wb").write(build(open(src, "rb").read()[32:], base)  # skip the 32-byte firmware header)
+    # skip the 32-byte firmware header: code links at 0x100000
+    open(dst, "wb").write(build(open(src, "rb").read()[32:], base))
     print(f"wrote {dst} (base 0x{base:x})")
