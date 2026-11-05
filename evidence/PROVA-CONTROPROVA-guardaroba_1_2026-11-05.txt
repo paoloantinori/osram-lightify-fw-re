@@ -1,0 +1,28 @@
+# PROVA E CONTROPROVA su osram_guardaroba_1 - 2026-11-05 20:03-20:07 (causalita' chiusa)
+# Protocollo: lampada accesa via MQTT diretto (no automazioni), sorveglianza continua
+# del topic set (ogni comando esterno visibile e loggato), power-cycle fisico, lettura stato.
+
+PROVA (C01 attivo: flag=1, valore salvato=0):
+  20:01:37 comando ON mio (brightness 200) + follower remember_state
+  20:02:57 comando ON dell'automazione presenza (loggato: attore esterno identificato)
+  20:03:37 ANNOUNCE (corrente tornata)
+  20:03:39 STATE: OFF  <- restore-OFF del firmware, NESSUN comando tra announce e OFF
+  Guardaroba_2 (stesso circuito, C01 inviato ma letturе rifiutate): announce 20:03:37,
+  tornata ON alle 20:03:39 -> il suo C01 non ha attecchito (anomalia sua, vedi note).
+
+CONTROPROVA (C03: flag=1, valore=1, default-ON):
+  20:03:56 C03 applicato, attrs verificati {4:1,5:1,6:3,7:1} (attr5 0->1)
+  20:04:30 comando ON mio (brightness 200)
+  20:06:11 ANNOUNCE (unico power-cut del maintainer)
+  stato al ritorno: ON (confermato da interrogazione diretta e dal maintainer:
+  "tornata accesa dopo il powercycle")
+  20:06:49 comando {"state":"OFF"} dell'automazione presenza (DOPPO il ciclo, loggato)
+
+ESITO: stessa lampada, stesso protocollo, unica variabile il comando a due byte:
+  C01 -> torna SPENTA; C03 -> torna ACCESA. Causalita' del comando sul comportamento
+  power-on: DIMOSTRATA con controllo attivo.
+
+CHIUSURA: C01 riapplicato a guardaroba_1 alle 20:07:04 (soluzione in opera).
+Stato flotta alla chiusura: cantina C01 (verificato ieri 19:17 + conferme),
+guardaroba_1 C01 (provato e controprovato oggi), guardaroba_2 C01 non attecchito
+(rifiuta attivamente le letture produttore: anomalia specifica di quel pezzo, aperta).
