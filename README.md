@@ -32,6 +32,11 @@ tries to answer from the firmware itself:
   indexed functions. See
   [findings/0003](findings/0003-osram-app-quarter.md) and
   [disasm/MAP_quarter.md](disasm/MAP_quarter.md).
+- The cluster 0xFC0F command handler is found and decoded: beyond the two
+  known commands it implements UNDOCUMENTED commands 0, 9 and 0x0A, and the
+  save command writes a 0xAA magic into the persisted power-on mode byte the
+  firmware consults at boot. See
+  [findings/0004](findings/0004-cluster-fc0f-command-handler.md).
 
 ## Reproduce
 
